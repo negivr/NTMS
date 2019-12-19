@@ -1,7 +1,12 @@
 from django.shortcuts import render
+from .models import Person
 
 
 def home(request):
-    return render(request, "dq/home.html")
+    persons = Person.objects.all()
+    context = {
+        'persons': persons
+    }
+    return render(request, "dq/_table_person.html", context)
 
 
