@@ -7,6 +7,6 @@ def home(request):
     context = {
         'persons': persons
     }
-    return render(request, "dq/_table_person.html", context)
+    return render(request, "dq/person_list.html", context)
 
 

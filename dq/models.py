@@ -62,7 +62,6 @@ class Employment(models.Model):
     FMCSA_subject = models.BooleanField(default=False)
     safety_sensitive = models.BooleanField(default=False)
 
-
     class Meta:
         ordering = ['-date_start']
 
