@@ -1,18 +1,23 @@
 <div class="container mt-2 mb-2">
-    <table  class="table table-striped table-bordered">
+    <table  data-toggle="table"
+            data-search="true"
+            data-pagination="true"
+            data-show-columns="true">
+<!--            data-detail-view="true"-->
+<!--            data-deail-formatter="ppg"-->
 
             <thead>
                 <tr>
                     <th data-field="first_name" data-sortable="true">First name</th>
                     <th data-field="last_name" data-sortable="true">Last name</th>
                     <th data-field="dob" data-sortable="true">DOB</th>
-                    <th data-field="ssn" data-sortable="true">SSN</th>
+                    <th data-field="ssn" data-sortable="true" data-visible="false">SSN</th>
                 </tr>
             </thead>
             <tbody>
                 {% for person in persons %}
                     <tr>
-                        <td>{{ person.first_name }}</td>
+                        <td><a href="#">{{ person.first_name }}</a></td>
                         <td>{{ person.last_name }}</td>
                         <td>{{ person.dob }}</td>
                         <td>{{ person.ssn }}</td>
@@ -21,5 +26,3 @@
             </tbody>
      </table>
 </div>
-
-

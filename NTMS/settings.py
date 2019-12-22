@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
-    "dq.apps.DqConfig",
+    "dq",
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -103,13 +104,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static') # potrebno je samo ako koristis collectstatic - onda ce svi static fajlovi da se prebace ovde
 
 MEDIA_URL = '/images/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    # os.path.join(BASE_DIR, 'images'),
 ]
-print(STATICFILES_DIRS)
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
