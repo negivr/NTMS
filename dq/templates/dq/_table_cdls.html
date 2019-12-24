@@ -1,0 +1,31 @@
+<table  data-toggle="table"
+        data-search="true"
+        data-pagination="true"
+        data-show-columns="true">
+<!--            data-detail-view="true"-->
+<!--            data-deail-formatter="ppg"-->
+
+        <thead>
+            <tr>
+                <th data-field="cdl_num" data-sortable="true">CDL number</th>
+                <th data-field="class" data-sortable="true">class</th>
+                <th data-field="state" data-sortable="true">state</th>
+                <th data-field="date_issue" data-sortable="true" >issue date</th>
+                <th data-field="date_expire" data-sortable="true" >expire date</th>
+                <th data-field="status" data-sortable="true" >status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cdl in cdls %}
+                <tr>
+<!--                        <td><a href="{% url 'dq:person-detail' person.id %}">{{ person.first_name }}</a></td>-->
+                    <td>{{ cdl.cdl_num }}</td>
+                    <td>{{ cdl.cdl_class }}</td>
+                    <td>{{ cdl.cdl_state }}</td>
+                    <td>{{ cdl.date_issue }}</td>
+                    <td>{{ cdl.date_expire }}</td>
+                    <td>{{ cdl.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+ </table>

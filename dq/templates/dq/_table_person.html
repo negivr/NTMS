@@ -17,7 +17,7 @@
             <tbody>
                 {% for person in persons %}
                     <tr>
-                        <td><a href="#">{{ person.first_name }}</a></td>
+                        <td><a href="{% url 'dq:person-detail' person.id %}">{{ person.first_name }}</a></td>
                         <td>{{ person.last_name }}</td>
                         <td>{{ person.dob }}</td>
                         <td>{{ person.ssn }}</td>

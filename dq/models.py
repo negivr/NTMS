@@ -19,16 +19,71 @@ class Person(models.Model):
 
 
 class Cdl(models.Model):
+    STATUSES = (
+        ('Active', 'Active'),
+        ('Surrendered', 'Surrendered'),
+        ('Suspended', 'Suspended'),
+        ('Invalid', 'Invalid'),
+    )
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     cdl_num = models.CharField(max_length=100, null=True, blank=True)
     cdl_class = models.CharField(max_length=100, null=True, blank=True)
     cdl_state = models.CharField(max_length=2, null=True, blank=True) # kasnije dodaj adrese - poseban model
+    status = models.CharField(max_length=100, null=True, blank=True, choices=STATUSES)
     date_issue = models.DateField(null=True)
     date_expire = models.DateField(null=True, blank=True)
     img = models.ImageField(upload_to=get_uploaded_cdl_file_name, null=True, blank=True)
 
     def __str__(self):
         return f'{self.person.first_name} {self.person.last_name} - {self.cdl_num} {self.cdl_state}'
+
+    # def get_active_cdl(self):
+    #     if self.date_expire is None or self.date_expire is
+    #     cdl_active = self.date_expire
+
+
+class Medical(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    cdl = models.ForeignKey(Cdl, on_delete=models.CASCADE)
+    qualified = models.BooleanField(default=False)
+    date_issue = models.DateField(null=True, blank=True)
+    date_expire = models.DateField(null=True, blank=True)
+    # img = models.ImageField(upload_to=get_uploaded_medical_file_name, null=True, blank=True)
+
+    class Meta:
+        ordering = ['date_issue']
+
+    def __str__(self):
+        return f'{self.person.first_name} {self.person.last_name} - {self.cdl.cdl_num} {self.date_expire}'
+
+
+class DrugTest(models.Model):
+    TYPE = (
+        ('Pre Employment', 'Pre Employment'),
+        ('Random', 'Random'),
+        ('Post Accident', 'Post Accident'),
+        ('Reasonable Suspicion', 'Reasonable Suspicion'),
+    )
+
+    RESULTS = (
+        ('NEGATIVE', 'NEGATIVE'),
+        ('POSITIVE', 'POSITIVE'),
+    )
+
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    type = models.CharField(max_length=100, null=True, choices=TYPE)
+    date_taken = models.DateField(null=True, blank=True)
+    date_results = models.DateField(null=True, blank=True)
+    results = models.CharField(max_length=100, null=True, blank=True, choices=RESULTS)
+    # request_doc = models.FileField(upload_to=get_uploaded_drug_file_name, null=True, blank=True)
+    # ccf_doc = models.FileField(upload_to=get_uploaded_drug_file_name, null=True, blank=True)
+    # results_doc = models.FileField(upload_to=get_uploaded_drug_file_name, null=True, blank=True)
+
+    class Meta:
+        ordering = ['date_results']
+
+    def __str__(self):
+        return f'{self.date_results} - {self.person.first_name} {self.person.last_name} - {self.type}: {self.results}'
 
 
 class Employer(models.Model):
