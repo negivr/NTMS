@@ -104,13 +104,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static') # potrebno je samo ako koristis collectstatic - onda ce svi static fajlovi da se prebace ovde
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn') # potrebno je samo ako koristis collectstatic - onda ce svi static fajlovi da se prebace ovde
 
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

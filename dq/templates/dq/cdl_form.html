@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+                {% for form in formset %}
+                    {{ form|crispy }}
+                    <hr><hr><hr><hr>
+                {% endfor %}
+            <button class="btn btn-outline-info" type="submit">Save</button>
+        </form>
+    </div>
+{% endblock %}
+

@@ -1,9 +1,9 @@
-{% extends 'dq/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content%}
     <div class="container emp-profile">
-        <form method="post">
+<!--        <form method="post">-->
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
@@ -23,7 +23,6 @@
                         <h5>
                             SSN: {{ person.ssn }}
                         </h5>
-    <!--                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>-->
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -33,7 +32,7 @@
 
     <!--                ja pocetak-->
 
-            <br><br>
+            <br>
             <div class="col-md">
                     <div class="profile-head">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -61,7 +60,6 @@
                         </ul>
                     </div>
                 </div>
-                <br><br>
                 <div class="col-md-12">
                     <div class="tab-content profile-tab" id="myTabContent">
                         <!--                CDL tab start-->
@@ -103,7 +101,7 @@
                                             <label>date_expire</label>
                                         </div>
                                         <div class="col-md-3">
-                                            <p>{{ active_cdl.date_expire|default_if_none:"current" }}</p>
+                                            <p>{{ active_cdl.date_expire|default_if_none:"expiration date not set" }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -111,9 +109,18 @@
                                             <label>status</label>
                                         </div>
                                         <div class="col-md-3">
-                                            <p>{{ active_cdl.status }}</p>
+                                            {% if cdls %}
+                                                {% if active_cdl.isactive %}
+                                                    <p>Active</p>
+                                                {% else %}
+                                                    <p>Surenderred</p>
+                                                {% endif %}
+                                            {% else %}
+                                                <p>No CDL</p>
+                                            {% endif %}
                                         </div>
                                     </div>
+                            <a href="{% url 'dq:person-cdl-create' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Add CDL for {{person.first_name}} {{person.last_name}}</a>
                             {% include 'dq/_table_cdls.html' %}
                         </div>
                         <!--                CDL tab end-->
@@ -158,6 +165,6 @@
                 </div>
     <!--                ja kraj-->
 
-        </form>
+<!--        </form>-->
     </div>
 {% endblock%}

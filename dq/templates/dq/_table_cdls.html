@@ -1,4 +1,5 @@
-<table  data-toggle="table"
+<table  class="table table-sm"
+        data-toggle="table"
         data-search="true"
         data-pagination="true"
         data-show-columns="true">
@@ -16,16 +17,21 @@
             </tr>
         </thead>
         <tbody>
-            {% for cdl in cdls %}
-                <tr>
-<!--                        <td><a href="{% url 'dq:person-detail' person.id %}">{{ person.first_name }}</a></td>-->
-                    <td>{{ cdl.cdl_num }}</td>
-                    <td>{{ cdl.cdl_class }}</td>
-                    <td>{{ cdl.cdl_state }}</td>
-                    <td>{{ cdl.date_issue }}</td>
-                    <td>{{ cdl.date_expire }}</td>
-                    <td>{{ cdl.status }}</td>
-                </tr>
-            {% endfor %}
+            {% if cdls %}
+                {% for cdl in cdls %}
+                    <tr>
+                        <td>{{ cdl.cdl_num }}</td>
+                        <td>{{ cdl.cdl_class }}</td>
+                        <td>{{ cdl.cdl_state }}</td>
+                        <td>{{ cdl.date_issue }}</td>
+                        <td>{{ cdl.date_expire }}</td>
+                        {% if not cdl.isactive %}
+                            <td>Surendered</td>
+                        {% else %}
+                            <td>Active</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
  </table>

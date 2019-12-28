@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from .functions import get_uploaded_cdl_file_name
+from .fields import UniqueBooleanFieldTrue, UniqueCharFieldActive
 
 from django.core.validators import MaxValueValidator
 
@@ -15,7 +16,9 @@ class Person(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def get_absolute_url(self):
-        return reverse('person-detail', kwargs={'pk': self.pk})  # return reverse("people:person-list")
+        # return reverse('person-detail', kwargs={'pk': self.pk})  # return reverse("people:person-list")
+        print(self.pk)
+        return reverse('person-detail', args=[str(self.pk)])
 
 
 class Cdl(models.Model):
@@ -29,17 +32,14 @@ class Cdl(models.Model):
     cdl_num = models.CharField(max_length=100, null=True, blank=True)
     cdl_class = models.CharField(max_length=100, null=True, blank=True)
     cdl_state = models.CharField(max_length=2, null=True, blank=True) # kasnije dodaj adrese - poseban model
-    status = models.CharField(max_length=100, null=True, blank=True, choices=STATUSES)
+    isactive = models.BooleanField(default=False)
+    # status = models.CharField(max_length=100, null=True, blank=True, choices=STATUSES)
     date_issue = models.DateField(null=True)
     date_expire = models.DateField(null=True, blank=True)
     img = models.ImageField(upload_to=get_uploaded_cdl_file_name, null=True, blank=True)
 
     def __str__(self):
         return f'{self.person.first_name} {self.person.last_name} - {self.cdl_num} {self.cdl_state}'
-
-    # def get_active_cdl(self):
-    #     if self.date_expire is None or self.date_expire is
-    #     cdl_active = self.date_expire
 
 
 class Medical(models.Model):
@@ -125,3 +125,5 @@ class Employment(models.Model):
 
     def get_absolute_url(self):
         return reverse('people:employment-list')
+
+
