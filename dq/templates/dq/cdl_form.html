@@ -2,13 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section">
+    <div class="container mt-4 mb-4">
         <form method="POST">
             {% csrf_token %}
             {{ formset.management_form }}
                 {% for form in formset %}
                     {{ form|crispy }}
-                    <hr><hr><hr><hr>
+                    <hr>
                 {% endfor %}
             <button class="btn btn-outline-info" type="submit">Save</button>
         </form>

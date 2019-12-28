@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit person"/>
+<!--                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit person"/>-->
+                        <a href="{% url 'dq:person-update' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Edit {{person.first_name}} {{person.last_name}}</a>
                 </div>
             </div>
 

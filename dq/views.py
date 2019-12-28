@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from .models import Person, Cdl
@@ -51,6 +52,18 @@ def person_create(request):
     return render(request, template_name, {'form': form})
 
 
+def person_update(request, pk):
+    template_name = 'dq/person_form.html'
+    person = Person.objects.get(id=pk)
+    form = PersonModelForm(instance=person)
+    if request.method == 'POST':
+        form = PersonModelForm(request.POST, instance=person)
+        if form.is_valid():
+            form.save()
+            return redirect('dq:person-detail', pk=person.id)
+    return render(request, template_name, {'form': form})
+
+
 def cdl_list(request):
     cdls = Cdl.objects.all()
     context = {
@@ -70,14 +83,23 @@ def cdl_create(request):
 
 
 def person_cdl_create(request, pk):
+    labels = {
+        'cdl_num': _('CDL#'),
+        'cdl_class': _('Class'),
+        'cdl_state': _('State'),
+        'isactive': _('Status'),
+        'date_issue': _('Issue date'),
+        'date_expire': _('Expiration date'),
+        'img': _('Image'),
+    }
     person = Person.objects.get(id=pk)
-    CdlFormSet = inlineformset_factory(Person, Cdl, fields='__all__')
+    CdlFormSet = inlineformset_factory(Person, Cdl, fields='__all__', labels=labels)
     formset = CdlFormSet(instance=person)  # form = CdlModelForm(request.POST or None)
     if request.method == 'POST':
         formset = CdlFormSet(request.POST, instance=person)
         if formset.is_valid():
             formset.save()
-            return redirect('dq:cdl-list')
+            return redirect('dq:person-detail', pk=person.id)  # RADI!!!
     context = {
         'formset': formset
     }
