@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .functions import get_uploaded_cdl_file_name
 from .fields import UniqueBooleanFieldTrue, UniqueCharFieldActive
 
@@ -17,8 +17,10 @@ class Person(models.Model):
 
     def get_absolute_url(self):
         # return reverse('person-detail', kwargs={'pk': self.pk})  # return reverse("people:person-list")
-        print(self.pk)
         return reverse('person-detail', args=[str(self.pk)])
+
+    def get_success_url(self):
+        return reverse_lazy('dq:person-detail', kwargs={'pk': self.object.pk})  # proveri da li radi
 
 
 class Cdl(models.Model):
@@ -40,6 +42,10 @@ class Cdl(models.Model):
 
     def __str__(self):
         return f'{self.person.first_name} {self.person.last_name} - {self.cdl_num} {self.cdl_state}'
+
+    def delete(self, *args, **kwargs):
+        self.img.delete()
+        super().delete(*args, **kwargs)
 
 
 class Medical(models.Model):

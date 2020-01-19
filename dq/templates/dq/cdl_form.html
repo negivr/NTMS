@@ -3,11 +3,12 @@
 
 {% block content %}
     <div class="container mt-4 mb-4">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ formset.management_form }}
                 {% for form in formset %}
                     {{ form|crispy }}
+<!--                    <input type="radio" name="aktivna">-->
                     <hr>
                 {% endfor %}
             <button class="btn btn-outline-info" type="submit">Save</button>

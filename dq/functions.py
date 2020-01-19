@@ -1,7 +1,9 @@
 import os
+from django.shortcuts import get_object_or_404
 from PIL import Image
 from time import time
 from django.conf import settings
+# from .models import Cdl
 
 
 def get_uploaded_cdl_file_name(instance, filename):
@@ -28,3 +30,12 @@ def get_uploaded_cdl_file_name(instance, filename):
     path = os.path.join("cdls", driver_name_dob, f_name)
 
     return path
+
+
+# def deactivate_cdl(person):
+#     cdls = Cdl.objects.filter(person=person)
+#     cdl_active = get_object_or_404(cdls, isactive=True)
+#     cdl_active.isactive = False
+#     cdl_active.save()
+
+

@@ -3,7 +3,7 @@
 
 {% block content%}
     <div class="container emp-profile">
-<!--        <form method="post">-->
+<!--        driver detail start-->
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
@@ -30,141 +30,156 @@
                         <a href="{% url 'dq:person-update' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Edit {{person.first_name}} {{person.last_name}}</a>
                 </div>
             </div>
-
-    <!--                ja pocetak-->
-
+<!--        driver detail end-->
             <br>
+<!--         CDL medical drug test mvr dot reports psp application start-->
             <div class="col-md">
-                    <div class="profile-head">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="cdl-tab" data-toggle="tab" href="#cdl" role="tab" aria-controls="cdl" aria-selected="true">CDL</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="medical-tab" data-toggle="tab" href="#medical" role="tab" aria-controls="medical" aria-selected="false">medical</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="drug-test-tab" data-toggle="tab" href="#drug-test" role="tab" aria-controls="drug-test" aria-selected="false">drug test</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="mvr-tab" data-toggle="tab" href="#mvr" role="tab" aria-controls="mvr" aria-selected="false">mvr</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="dot-reports-tab" data-toggle="tab" href="#dot-reports" role="tab" aria-controls="dot-reports" aria-selected="false">dot reports</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="psp-tab" data-toggle="tab" href="#psp" role="tab" aria-controls="psp" aria-selected="false">psp</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="application-tab" data-toggle="tab" href="#application" role="tab" aria-controls="application" aria-selected="false">application</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="profile-head">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="cdl-tab" data-toggle="tab" href="#cdl" role="tab" aria-controls="cdl" aria-selected="true">CDL</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="medical-tab" data-toggle="tab" href="#medical" role="tab" aria-controls="medical" aria-selected="false">medical</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="drug-test-tab" data-toggle="tab" href="#drug-test" role="tab" aria-controls="drug-test" aria-selected="false">drug test</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="mvr-tab" data-toggle="tab" href="#mvr" role="tab" aria-controls="mvr" aria-selected="false">mvr</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="dot-reports-tab" data-toggle="tab" href="#dot-reports" role="tab" aria-controls="dot-reports" aria-selected="false">dot reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="psp-tab" data-toggle="tab" href="#psp" role="tab" aria-controls="psp" aria-selected="false">psp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="application-tab" data-toggle="tab" href="#application" role="tab" aria-controls="application" aria-selected="false">application</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-md-12">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <!--                CDL tab start-->
-                        <div class="tab-pane fade show active" id="cdl" role="tabpanel" aria-labelledby="cdl-tab">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>CDL number</label>
-                                        </div>
-                                        <div class="col-md-3">
+            </div>
+<!--         CDL medical drug test mvr dot reports psp application end-->
+<!--        tab container start-->
+            <div class="col-md-12">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <!--                CDL tab start-->
+                    <div class="tab-pane fade show active" id="cdl" role="tabpanel" aria-labelledby="cdl-tab">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>CDL number</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {% if active_cdl %}
                                             <p>{{ active_cdl.cdl_num }}</p>
-                                        </div>
+                                        {% else %}
+                                            <p>No active CDL</p>
+                                        {% endif %}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>class</label>
-                                        </div>
-                                        <div class="col-md-3">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>class</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {% if active_cdl %}
                                             <p>{{ active_cdl.cdl_class }}</p>
-                                        </div>
+                                        {% endif %}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>state</label>
-                                        </div>
-                                        <div class="col-md-3">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>state</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {% if active_cdl %}
                                             <p>{{ active_cdl.cdl_state }}</p>
-                                        </div>
+                                        {% endif %}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>date issued</label>
-                                        </div>
-                                        <div class="col-md-3">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>date issued</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {% if active_cdl %}
                                             <p>{{ active_cdl.date_issue }}</p>
-                                        </div>
+                                        {% endif %}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>date_expire</label>
-                                        </div>
-                                        <div class="col-md-3">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>date_expire</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {% if active_cdl %}
                                             <p>{{ active_cdl.date_expire|default_if_none:"expiration date not set" }}</p>
-                                        </div>
+                                        {% endif %}
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>status</label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            {% if cdls %}
-                                                {% if active_cdl.isactive %}
-                                                    <p>Active</p>
-                                                {% else %}
-                                                    <p>Surenderred</p>
-                                                {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>status</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        {% if cdls %}
+                                        {% if active_cdl %}
+                                            {% if active_cdl.isactive %}
+                                                <p>Active</p>
                                             {% else %}
-                                                <p>No CDL</p>
+                                                <p>Surenderred</p>
                                             {% endif %}
-                                        </div>
+                                        {% endif %}
+                                        {% else %}
+                                            <p>No CDL</p>
+                                        {% endif %}
                                     </div>
-                            <a href="{% url 'dq:person-cdl-create' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Add CDL for {{person.first_name}} {{person.last_name}}</a>
-                            {% include 'dq/_table_cdls.html' %}
-                        </div>
-                        <!--                CDL tab end-->
-
-                        <!--                medical tab start-->
-                        <div class="tab-pane fade" id="medical" role="tabpanel" aria-labelledby="medical-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>qualified</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>OK</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>issue date</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>12-23-2019</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>expiration date</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>12-23-2021</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Picture</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>slika medical kartice</p>
-                                        </div>
-                                    </div>
-                        </div>
-                        <!--                medical tab end-->
+                                </div>
+                        <a href="{% url 'dq:person-cdl-create' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Add CDL for {{person.first_name}} {{person.last_name}}</a>
+                        {% include 'dq/_table_cdls.html' %}
                     </div>
+                    <!--                CDL tab end-->
+
+                    <!--                medical tab start-->
+                    <div class="tab-pane fade" id="medical" role="tabpanel" aria-labelledby="medical-tab">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>qualified</label>
+                            </div>
+                            <div class="col-md-3">
+                                <p>OK</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>issue date</label>
+                            </div>
+                            <div class="col-md-3">
+                                <p>12-23-2019</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>expiration date</label>
+                            </div>
+                            <div class="col-md-3">
+                                <p>12-23-2021</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Picture</label>
+                            </div>
+                            <div class="col-md-3">
+                                <p>slika medical kartice</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                medical tab end-->
                 </div>
-    <!--                ja kraj-->
+            </div>
+<!--         tab container end-->
 
 <!--        </form>-->
     </div>

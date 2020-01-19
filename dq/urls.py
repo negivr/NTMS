@@ -8,7 +8,9 @@ urlpatterns = [
     path("person/create/", views.person_create, name="person-create"),
     path("person/update/<int:pk>", views.person_update, name="person-update"),
     path("cdls/", views.cdl_list, name="cdl-list"),
+    path("detail/cdl/<int:pk>/", views.cdl_detail, name="cdl-detail"),
     path("cdl/create/", views.cdl_create, name="cdl-create"),
     path("cdl/create/<int:pk>/", views.person_cdl_create, name="person-cdl-create"),
+    path("delete/cdl/<int:pk>/", views.cdl_delete, name="cdl-delete"),
 ]
 

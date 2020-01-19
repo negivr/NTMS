@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+<div class="container">
+    <div class="tab-pane fade show active" id="cdl" role="tabpanel" aria-labelledby="cdl-tab">
+        <div class="row">
+            <div class="col-md-3">
+                <label>CDL number</label>
+            </div>
+            <div class="col-md-3">
+                    <p>{{ cdl.cdl_num }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>class</label>
+            </div>
+            <div class="col-md-3">
+                    <p>{{ cdl.cdl_class }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>state</label>
+            </div>
+            <div class="col-md-3">
+                    <p>{{ cdl.cdl_state }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>date issued</label>
+            </div>
+            <div class="col-md-3">
+                    <p>{{ cdl.date_issue }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>date_expire</label>
+            </div>
+            <div class="col-md-3">
+                    <p>{{ cdl.date_expire|default_if_none:"expiration date not set" }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>status</label>
+            </div>
+            <div class="col-md-3">
+                {% if cdl.isactive %}
+                    <p>Active</p>
+                {% else %}
+                    <p>Surenderred</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>image</label>
+            </div>
+            <div class="col-md-3">
+                {% if cdl.img %}
+                    <a href="{{ cdl.img.url }}" class="btn btn-outline-info" target="_blank">See image</a>
+                {% else %}
+                    <p>no image</p>
+                {% endif %}
+            </div>
+        </div>
+        <form method="POST" action="{% url 'dq:cdl-delete' cdl.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete CDL</button>
+        </form>
+    </div>
+</div>
+{% endblock%}
