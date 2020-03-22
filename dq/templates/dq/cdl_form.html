@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'dq/base.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -9,7 +9,7 @@
                 {% for form in formset %}
                     {{ form|crispy }}
 <!--                    <input type="radio" name="aktivna">-->
-                    <hr>
+            <p>======================================================================================================</p>
                 {% endfor %}
             <button class="btn btn-outline-info" type="submit">Save</button>
         </form>

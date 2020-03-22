@@ -2,40 +2,27 @@
 {% load static %}
 {% block content %}
 
-<br>
+    <div class="cards">
+            <a href="{% url 'dq:person-list' %}">
+                <div class="card">
+                    <img src="{% static 'images/people400x400.jpg' %}" alt="people">
+                    <h1>people</h1>
+                </div>
+            </a>
+            <a href="#">
+                <div class="card">
+                    <img src="{% static 'images/truck400x400.jpg' %}" alt="truck">
+                    <h1>trucks</h1>
+                </div>
+            </a>
+            <a href="#">
+                <div class="card">
+                    <img src="{% static 'images/trailer400x400.jpg' %}" alt="trailer">
+                    <h1>trailers</h1>
+                </div>
+            </a>
+     </div>
 
-<div class="container">
-    <div class="card bg-dark text-white">
-      <img src="{% static 'images/wallpaper1.png' %}" class="card-img-top" width="960" height="120" alt="slicka">
-      <div class="card-img-overlay">
-          <a href="{% url 'dq:person-list' %}" class="stretched-link">DQ</a>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-</div>
-<br>
-<div class="container">
-    <div class="card bg-dark text-white">
-        <img src="{% static 'images/wallpaper2.png' %}" class="card-img-top" width="960" height="120" alt="slicka">
-          <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text">Last updated 3 mins ago</p>
-          </div>
-    </div>
-
-</div>
-<br>
-<div class="container">
-    <div class="card bg-dark text-white">
-      <img src="{% static 'images/wallpaper3.jpg' %}" class="card-img-top" width="960" height="120" alt="slicka">
-      <div class="card-img-overlay">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text">Last updated 3 mins ago</p>
-      </div>
-    </div>
-</div>
 
 {% endblock %}
 

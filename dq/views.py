@@ -39,7 +39,7 @@ def person_detail(request, pk):
             context = {
                 'person': person,
                 'active_cdl': '',
-                'cdls': ''
+                'cdls': cdls
             }
     else:
         context = {

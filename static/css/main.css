@@ -1,0 +1,73 @@
+:root {
+  --primary: #ddd;
+  --dark: #333;
+  --light: #fff;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ccc;
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+html {
+  height: 100%;
+}
+
+.cards {
+  width: 90%;
+  margin: 180px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cards a {
+  text-decoration: none;
+}
+
+.cards .card {
+  background: var(--primary);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.cards .card img {
+  width: 100%;
+}
+
+.cards .card h1 {
+  color: var(--dark);
+}
+
+footer {
+  width: 100%;
+  background: var(--dark);
+  color: var(--light);
+  text-align: center;
+  margin-top: auto;
+  padding: 2rem;
+}
+
+footer h6 {
+  text-transform: uppercase;
+}
+/*# sourceMappingURL=main.css.map */

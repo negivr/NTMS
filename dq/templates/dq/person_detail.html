@@ -1,186 +1,173 @@
-{% extends 'base.html' %}
+{% extends 'dq/base.html' %}
 {% load static %}
 
-{% block content%}
-    <div class="container emp-profile">
-<!--        driver detail start-->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="{% static 'dq/images/dog.jpg'%}" alt=""/>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h3>
-                            {{ person.first_name}} {{person.last_name }}
-                        </h3>
-                        <br>
-                        <h5>
-                            DOB: {{ person.dob }}
-                        </h5>
-                        <br>
-                        <h5>
-                            SSN: {{ person.ssn }}
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-md-2">
-<!--                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit person"/>-->
-                        <a href="{% url 'dq:person-update' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Edit {{person.first_name}} {{person.last_name}}</a>
-                </div>
+{% block content %}
+    <!-- Navigation start -->
+    <nav class="main-nav">
+        <ul>
+            <li id="logo"><a href="{% url 'home' %}">G2</a></li>
+            <li id="people"><a href="{% url 'dq:person-list' %}">people</a></li>
+            <li id="add-person"><a href="{% url 'dq:person-create' %}">add person</a></li>
+        </ul>
+    </nav><!-- navigation end -->
+    
+     <!-- Driver detail start -->
+    <section class="driver-detail">
+        {% if active_cdl.img %}
+            <img class="cdl-slika" src="{% static 'dq/images/cdl.jpeg' %}" alt="">
+        {% else %}
+            <p>no image</p>
+        {% endif %}
+        <div class="driver-detail-text">
+            <h3>{{ person.first_name}} {{person.last_name }}</h3>
+            <h3>CDL: {{active_cdl.cdl_num}} {{active_cdl.cdl_state}}</h3>
+            <h3>SSN: {{ person.ssn }}</h3>
+            <div class="btn-edit">
+               <a href="{% url 'dq:person-update' person.id  %}">Edit {{ person.first_name}} {{person.last_name }}</a>
             </div>
-<!--        driver detail end-->
-            <br>
-<!--         CDL medical drug test mvr dot reports psp application start-->
-            <div class="col-md">
-                <div class="profile-head">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="cdl-tab" data-toggle="tab" href="#cdl" role="tab" aria-controls="cdl" aria-selected="true">CDL</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="medical-tab" data-toggle="tab" href="#medical" role="tab" aria-controls="medical" aria-selected="false">medical</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="drug-test-tab" data-toggle="tab" href="#drug-test" role="tab" aria-controls="drug-test" aria-selected="false">drug test</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="mvr-tab" data-toggle="tab" href="#mvr" role="tab" aria-controls="mvr" aria-selected="false">mvr</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="dot-reports-tab" data-toggle="tab" href="#dot-reports" role="tab" aria-controls="dot-reports" aria-selected="false">dot reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="psp-tab" data-toggle="tab" href="#psp" role="tab" aria-controls="psp" aria-selected="false">psp</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="application-tab" data-toggle="tab" href="#application" role="tab" aria-controls="application" aria-selected="false">application</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-<!--         CDL medical drug test mvr dot reports psp application end-->
-<!--        tab container start-->
-            <div class="col-md-12">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <!--                CDL tab start-->
-                    <div class="tab-pane fade show active" id="cdl" role="tabpanel" aria-labelledby="cdl-tab">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>CDL number</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        {% if active_cdl %}
-                                            <p>{{ active_cdl.cdl_num }}</p>
-                                        {% else %}
-                                            <p>No active CDL</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>class</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        {% if active_cdl %}
-                                            <p>{{ active_cdl.cdl_class }}</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>state</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        {% if active_cdl %}
-                                            <p>{{ active_cdl.cdl_state }}</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>date issued</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        {% if active_cdl %}
-                                            <p>{{ active_cdl.date_issue }}</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>date_expire</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        {% if active_cdl %}
-                                            <p>{{ active_cdl.date_expire|default_if_none:"expiration date not set" }}</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label>status</label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        {% if cdls %}
-                                        {% if active_cdl %}
-                                            {% if active_cdl.isactive %}
-                                                <p>Active</p>
-                                            {% else %}
-                                                <p>Surenderred</p>
-                                            {% endif %}
-                                        {% endif %}
-                                        {% else %}
-                                            <p>No CDL</p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                        <a href="{% url 'dq:person-cdl-create' person.id  %}" class="btn btn-outline-info" role="button" aria-pressed="true">Add CDL for {{person.first_name}} {{person.last_name}}</a>
-                        {% include 'dq/_table_cdls.html' %}
-                    </div>
-                    <!--                CDL tab end-->
+        </div>
 
-                    <!--                medical tab start-->
-                    <div class="tab-pane fade" id="medical" role="tabpanel" aria-labelledby="medical-tab">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>qualified</label>
-                            </div>
-                            <div class="col-md-3">
-                                <p>OK</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>issue date</label>
-                            </div>
-                            <div class="col-md-3">
-                                <p>12-23-2019</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>expiration date</label>
-                            </div>
-                            <div class="col-md-3">
-                                <p>12-23-2021</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Picture</label>
-                            </div>
-                            <div class="col-md-3">
-                                <p>slika medical kartice</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--                medical tab end-->
-                </div>
-            </div>
-<!--         tab container end-->
 
-<!--        </form>-->
-    </div>
-{% endblock%}
+        <div class="warnings">
+            <h3>WARNINGS</h3>
+            <ul>
+                <li>cdl expire in 30 days</li>
+                <li>medical expires 03-28-2020</li>
+                <li>turn in paperwork</li>
+                <li>cdl expire in 30 days</li>
+                <li>medical expires 03-28-2020</li>
+                <li>turn in paperwork</li>
+                <li>cdl expire in 30 days</li>
+                <li>medical expires 03-28-2020</li>
+                <li>turn in paperwork</li>
+            </ul>
+        </div>
+    </section><!-- Driver detail end -->
+
+    <!-- CDL medical drug test mvr dot reports psp application start -->
+    <section class="dq">
+        <ul class="tabs">
+            <li data-tab-target="#cdls" class="tab active">CDLs</li>
+            <li data-tab-target="#medicals" class="tab">medicals</li>
+            <li data-tab-target="#drug-tests" class="tab">drug tests</li>
+            <li data-tab-target="#mvrs" class="tab">mvrs</li>
+            <li data-tab-target="#dot-reports" class="tab">dot reports</li>
+            <li data-tab-target="#psps" class="tab">psps</li>
+            <li data-tab-target="#applications" class="tab">applications</li>
+        </ul>
+        <div class="tab-content">
+            <!-- CDLS tab start -->
+            <div id="cdls" data-tab-content class="active">
+                <div class="active-item">
+                    <div class="active-item-pic">
+                        <img src="{% static 'dq/images/cat-700x400.jpg' %}" alt="">
+                    </div>
+                    <div class="active-item-text">
+                        <p>CDL# V456-6532-9857 IL</p>
+                        <p>Class: A</p>
+                        <p>date issued: 02-28-2018</p>
+                        <p>date expire: 02-28-2023</p>
+                    </div>
+                </div>
+                <h1>CDLs</h1>
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>CDL number</th>
+                            <th>State</th>
+                            <th>Class</th>
+                            <th>Issued</th>
+                            <th>Expire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                    </tbody>
+                </table><!-- cdls-table end -->
+            </div><!-- CDLS tab end -->
+            <!-- MEDICAL tab start -->
+            <div id="medicals" data-tab-content>
+                <div class="active-item">
+                    <div class="active-item-pic">
+                        <img src="{% static 'dq/images/dog.jpg' %}" alt="">
+                    </div>
+                    <div class="active-item-text">
+                        <p>CDL# V456-6532-9857 IL</p>
+                        <p>Class: A</p>
+                        <p>date issued: 02-28-2018</p>
+                        <p>date expire: 02-28-2023</p>
+                    </div>
+                </div>
+                <h1>CDLs</h1>
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>CDL number</th>
+                            <th>State</th>
+                            <th>Class</th>
+                            <th>Issued</th>
+                            <th>Expire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                        <tr>
+                            <td>V123-4567-8912</td>
+                            <td>IL</td>
+                            <td>A</td>
+                            <td>02-08-2008</td>
+                            <td>02-08-2018</td>
+                        </tr>
+                    </tbody>
+                </table><!-- cdls-table end -->
+            </div><!-- MEDICAL tab end -->
+        </div>
+    </section><!-- CDL medical drug test mvr dot reports psp application end -->
+{% endblock %}
